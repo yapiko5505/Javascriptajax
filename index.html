@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScriptajax</title>
+    <link href="style.css" rel="stylesheet">
+ 
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1></h1>
+        </div>
+    </header>
+    <main>
+        <section>
+            <ul class="list">
+                <li class="seminar" id="js">
+                    <h2>JavaScript勉強会</h2>
+                    <p class="check">空き席状況を確認</p>
+                </li>
+                <li class="seminar" id="security">
+                    <h2>セキュリティ対策講座</h2>
+                    <p class="check">空き席状況を確認</p>
+                </li>
+                <li class="seminar" id="aiux">
+                    <h2>AIを利用したUX設計</h2>
+                    <p class="check">空き席状況を確認</p>
+                </li>
+            </ul>
+        </section>
+    </main>
+    <script src="jquery-3.6.0.min.js"></script>
+    <script>
+         'use strict';
+
+        $(document).ready(function(){
+        // ファイルの読み込み
+            $.ajax({url: 'data.json', dataType: 'json'})
+            .done(function(data){
+                data.forEach(function(item, index){
+                    if(item.crowded === 'yes') {
+                        const idName = '#' + item.id;
+                        $(idName).find(' .check').addClass('crowded');
+                    }
+                    
+                });
+            })
+            .fail(function(){
+                window.alert('読み込みエラー');
+            });
+
+             // クリックされたら空き席状況を表示
+            $(' .check') .on('click', function(){
+            if($(this).hasClass('crowded')) {
+             $(this).text('残席わずか').addClass('red');
+                } else {
+                $(this).text('お席あります。').addClass('green');
+                }
+            });
+        });
+
+
+
+    </script>
+    
+</body>
+</html>
