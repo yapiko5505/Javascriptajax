@@ -1,5 +1,7 @@
 # Javascriptajax
 
+ajax技術を使用したにて空き席状況を確認できるサイトです。
+
  # デモ
  [webサイト](https://yasuko-ajax.herokuapp.com)
 
